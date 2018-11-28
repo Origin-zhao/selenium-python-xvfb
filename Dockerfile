@@ -17,13 +17,10 @@ ARG GECKODRIVER_FILE=v${GECKODRIVER_VERSION}/geckodriver-v${GECKODRIVER_VERSION}
 # extra dependencies (over what buildpack-deps already includes)
 RUN apt-get update && apt-get install -y --no-install-recommends \
 		tk-dev build-essential libssl-dev python-setuptools xauth \
-		$BROWSER vim xvfb xserver-xephyr vnc4server xz-utils zlib1g-dev \
-	        && rm -rf /var/lib/apt/lists/*
-
-
-RUN apt-get install locales
-RUN locale-gen en_US.UTF-8
-RUN sudo echo "Asia/Shanghai" > /etc/timezone
+		$BROWSER vim xvfb xserver-xephyr vnc4server xz-utils zlib1g-dev locales\
+		&& locale-gen en_US.UTF-8 \
+		&& echo "Asia/Shanghai" > /etc/timezone \
+	      && rm -rf /var/lib/apt/lists/*
 
 RUN set -ex \
 	\
