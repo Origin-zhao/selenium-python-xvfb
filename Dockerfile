@@ -12,11 +12,9 @@ ENV DISPLAY :99
 
 # extra dependencies (over what buildpack-deps already includes)
 RUN apt-get update && apt-get install -y --no-install-recommends \
-		tk-dev \
-		$BROWSER \
-	      build-essential libssl-dev python-setuptools \
-            vim xvfb xz-utils zlib1g-dev \
-	      && rm -rf /var/lib/apt/lists/*
+		tk-dev build-essential libssl-dev python-setuptools \
+		$BROWSER vim xvfb xz-utils zlib1g-dev \
+	        && rm -rf /var/lib/apt/lists/*
 
 ENV GPG_KEY 0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
 ENV PYTHON_VERSION 3.6.7
