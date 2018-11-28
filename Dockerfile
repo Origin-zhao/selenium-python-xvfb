@@ -18,6 +18,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 ENV GPG_KEY 0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
 ENV PYTHON_VERSION 3.5.5
+ARG GECKODRIVER_VERSION=0.22.0
+ARG GECKODRIVER_FILE=v${GECKODRIVER_VERSION}/geckodriver-v${GECKODRIVER_VERSION}-linux64.tar.gz
 
 RUN set -ex \
 	\
@@ -54,6 +56,16 @@ RUN set -ex \
 	&& rm -rf /usr/src/python \
 	\
 	&& python3 --version
+
+RUN curl -s -o /tmp/geckodriver.tar.gz -L \
+  https://github.com/mozilla/geckodriver/releases/download/$GECKODRIVER_FILE \
+  && rm -rf /usr/bin/geckodriver \
+  && tar -C /usr/bin -zxf /tmp/geckodriver.tar.gz \
+  && rm /tmp/geckodriver.tar.gz \
+  && mv /usr/bin/geckodriver /usr/bin/geckodriver-$GECKODRIVER_VERSION \
+  && chmod 755 /usr/bin/geckodriver-$GECKODRIVER_VERSION \
+  && ln -fs /usr/bin/geckodriver-$GECKODRIVER_VERSION /usr/bin/geckodriver
+
 
 # make some useful symlinks that are expected to exist
 RUN cd /usr/local/bin \
