@@ -3,6 +3,8 @@ FROM buildpack-deps:jessie
 # ensure local python is preferred over distribution python
 ENV PATH /usr/local/bin:$PATH
 
+ENV LANG C.UTF-8 
+ENV TZ Asia/Shanghai
 ENV BROWSER firefox-esr
 ENV DISPLAY :99
 ENV GPG_KEY 0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
@@ -17,9 +19,7 @@ ARG GECKODRIVER_FILE=v${GECKODRIVER_VERSION}/geckodriver-v${GECKODRIVER_VERSION}
 # extra dependencies (over what buildpack-deps already includes)
 RUN apt-get update && apt-get install -y --no-install-recommends \
 		tk-dev build-essential libssl-dev python-setuptools xauth \
-		$BROWSER vim xvfb xserver-xephyr vnc4server xz-utils zlib1g-dev locales\
-		&& locale-gen en_US.UTF-8 \
-		&& echo "Asia/Shanghai" > /etc/timezone \
+		$BROWSER vim xvfb xserver-xephyr vnc4server xz-utils zlib1g-dev \
 	      && rm -rf /var/lib/apt/lists/*
 
 RUN set -ex \
