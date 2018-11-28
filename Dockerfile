@@ -13,7 +13,7 @@ ENV DISPLAY :99
 # extra dependencies (over what buildpack-deps already includes)
 RUN apt-get update && apt-get install -y --no-install-recommends \
 		tk-dev build-essential libssl-dev python-setuptools \
-		$BROWSER vim xvfb xz-utils zlib1g-dev \
+		$BROWSER vim xvfb xserver-xephyr vnc4server xz-utils zlib1g-dev \
 	        && rm -rf /var/lib/apt/lists/*
 
 ENV GPG_KEY 0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
@@ -84,7 +84,7 @@ RUN set -ex; \
 		\) -exec rm -rf '{}' +; \
 	rm -f get-pip.py
 
-RUN pip3 install selenium pyvirtualdisplay xauth requests unittest-xml-reporting pymongo lxml requests
+RUN pip3 install selenium pyvirtualdisplay requests unittest-xml-reporting pymongo lxml requests
 
 
 #==================
