@@ -84,7 +84,7 @@ RUN set -ex; \
 		\) -exec rm -rf '{}' +; \
 	rm -f get-pip.py
 
-RUN pip3 install selenium pyvirtualdisplay requests unittest-xml-reporting pymongo lxml requests
+RUN pip3 install selenium pyvirtualdisplay xauth requests unittest-xml-reporting pymongo lxml requests
 
 
 #==================
