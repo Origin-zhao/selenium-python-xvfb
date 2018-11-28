@@ -57,8 +57,7 @@ RUN set -ex \
 	\
 	&& python3 --version
 
-RUN curl -s -o /tmp/geckodriver.tar.gz -L \
-  https://github.com/mozilla/geckodriver/releases/download/$GECKODRIVER_FILE \
+RUN  wget -O /tmp/geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/$GECKODRIVER_FILE \
   && rm -rf /usr/bin/geckodriver \
   && tar -C /usr/bin -zxf /tmp/geckodriver.tar.gz \
   && rm /tmp/geckodriver.tar.gz \
