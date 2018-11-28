@@ -12,7 +12,7 @@ ENV DISPLAY :99
 
 # extra dependencies (over what buildpack-deps already includes)
 RUN apt-get update && apt-get install -y --no-install-recommends \
-		tk-dev build-essential libssl-dev python-setuptools \
+		tk-dev build-essential libssl-dev python-setuptools xauth \
 		$BROWSER vim xvfb xserver-xephyr vnc4server xz-utils zlib1g-dev \
 	        && rm -rf /var/lib/apt/lists/*
 
