@@ -3,7 +3,7 @@ FROM buildpack-deps:jessie
 # ensure local python is preferred over distribution python
 ENV PATH /usr/local/bin:$PATH
 
-ENV BROWSER Firefox
+ENV BROWSER firefox-esr
 ENV DISPLAY :99
 
 #================================================
