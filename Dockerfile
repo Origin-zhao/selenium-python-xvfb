@@ -13,7 +13,10 @@ ENV DISPLAY :99
 # extra dependencies (over what buildpack-deps already includes)
 RUN apt-get update && apt-get install -y --no-install-recommends \
 		tk-dev \
-	&& rm -rf /var/lib/apt/lists/*
+		$BROWSER \
+	      build-essential libssl-dev python-setuptools \
+            vim xvfb xz-utils zlib1g-dev \
+	      && rm -rf /var/lib/apt/lists/*
 
 ENV GPG_KEY 0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
 ENV PYTHON_VERSION 3.6.7
@@ -82,10 +85,6 @@ RUN set -ex; \
 			\( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
 		\) -exec rm -rf '{}' +; \
 	rm -f get-pip.py
-
-RUN apt-get update && apt-get install -y $BROWSER \
-        build-essential libssl-dev python-setuptools \
-        vim xvfb xz-utils zlib1g-dev
 
 RUN pip3 install selenium pyvirtualdisplay requests unittest-xml-reporting pymongo lxml requests
 
