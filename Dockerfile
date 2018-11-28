@@ -1,4 +1,7 @@
-FROM ubuntu:14.04
+FROM buildpack-deps:jessie
+
+# ensure local python is preferred over distribution python
+ENV PATH /usr/local/bin:$PATH
 
 ENV BROWSER Firefox
 ENV DISPLAY :99
