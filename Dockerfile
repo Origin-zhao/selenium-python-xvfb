@@ -5,6 +5,10 @@ ENV PATH /usr/local/bin:$PATH
 
 ENV BROWSER firefox-esr
 ENV DISPLAY :99
+ENV GPG_KEY 0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
+ENV PYTHON_VERSION 3.5.5
+ARG GECKODRIVER_VERSION=0.22.0
+ARG GECKODRIVER_FILE=v${GECKODRIVER_VERSION}/geckodriver-v${GECKODRIVER_VERSION}-linux64.tar.gz
 
 #================================================
 # Installations
@@ -16,10 +20,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		$BROWSER vim xvfb xserver-xephyr vnc4server xz-utils zlib1g-dev \
 	        && rm -rf /var/lib/apt/lists/*
 
-ENV GPG_KEY 0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
-ENV PYTHON_VERSION 3.5.5
-ARG GECKODRIVER_VERSION=0.22.0
-ARG GECKODRIVER_FILE=v${GECKODRIVER_VERSION}/geckodriver-v${GECKODRIVER_VERSION}-linux64.tar.gz
+
+RUN apt-get install locales
+RUN locale-gen en_US.UTF-8
+RUN sudo echo "Asia/Shanghai" > /etc/timezone
 
 RUN set -ex \
 	\
